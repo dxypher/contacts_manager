@@ -23,7 +23,7 @@ describe PhoneNumbersController do
   # This should return the minimal set of attributes required to create a valid
   # PhoneNumber. As you add validations to PhoneNumber, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "number" => "MyString", "person_id" => 1 } }
+  let(:valid_attributes) { { "number" => "MyString", "contact_id" => 1, contact_type: 'Person' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -64,7 +64,7 @@ describe PhoneNumbersController do
   describe "POST create" do
     describe "with valid params" do
       let(:alice) { Person.create(first_name: 'Alice', last_name: 'Smith') }
-      let(:valid_attributes) { {number: '555-1234', person_id: alice.id} }
+      let(:valid_attributes) { {number: '555-1234', contact_id: alice.id, contact_type: 'Person'} }
 
       it "creates a new PhoneNumber" do
         expect {
@@ -105,7 +105,7 @@ describe PhoneNumbersController do
     describe "with valid params" do
 
       let(:john) {john = Person.create(first_name: 'John', last_name: "Doe")}
-      let(:valid_attributes) { {number: '555-3434', person_id: john.id} }
+      let(:valid_attributes) { {number: '555-3434', contact_id: john.id, contact_type: 'Person'} }
 
       it "updates the requested phone_number" do
         phone_number = PhoneNumber.create! valid_attributes
@@ -152,7 +152,7 @@ describe PhoneNumbersController do
   describe "DELETE destroy" do
 
     let(:john) {john = Person.create(first_name: 'John', last_name: "Doe")}
-    let(:valid_attributes) { {number: '555-3434', person_id: john.id} }
+    let(:valid_attributes) { {number: '555-3434', contact_id: john.id, contact_type: 'Person'} }
 
     it "destroys the requested phone_number" do
       phone_number = PhoneNumber.create! valid_attributes

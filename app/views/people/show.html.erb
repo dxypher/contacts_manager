@@ -15,6 +15,12 @@
     <li><%= phone.number %> <%= link_to "edit", edit_phone_number_path(phone) %> | <%= link_to "delete", phone_number_path(phone), method: :delete %></li>
   <% end %>
 </ul>
+
+<ul>
+  <% @person.email_addresses.each do |email_address| %>
+    <li><%= email_address.address %></li>
+  <%end%>
+</ul>
 <%= link_to 'Add phone number', new_phone_number_path(person_id: @person.id) %> |
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

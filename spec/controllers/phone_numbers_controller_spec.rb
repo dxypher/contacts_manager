@@ -103,6 +103,10 @@ describe PhoneNumbersController do
 
   describe "PUT update" do
     describe "with valid params" do
+
+      let(:john) {john = Person.create(first_name: 'John', last_name: "Doe")}
+      let(:valid_attributes) { {number: '555-3434', person_id: john.id} }
+
       it "updates the requested phone_number" do
         phone_number = PhoneNumber.create! valid_attributes
         # Assuming there are no other phone_numbers in the database, this
@@ -122,7 +126,7 @@ describe PhoneNumbersController do
       it "redirects to the phone_number" do
         phone_number = PhoneNumber.create! valid_attributes
         put :update, {:id => phone_number.to_param, :phone_number => valid_attributes}, valid_session
-        response.should redirect_to(phone_number)
+        expect(response).to redirect_to(john)
       end
     end
 
@@ -146,6 +150,10 @@ describe PhoneNumbersController do
   end
 
   describe "DELETE destroy" do
+
+    let(:john) {john = Person.create(first_name: 'John', last_name: "Doe")}
+    let(:valid_attributes) { {number: '555-3434', person_id: john.id} }
+
     it "destroys the requested phone_number" do
       phone_number = PhoneNumber.create! valid_attributes
       expect {
@@ -156,7 +164,7 @@ describe PhoneNumbersController do
     it "redirects to the phone_numbers list" do
       phone_number = PhoneNumber.create! valid_attributes
       delete :destroy, {:id => phone_number.to_param}, valid_session
-      response.should redirect_to(phone_numbers_url)
+      expect(:response).to redirect_to(john)
     end
   end
 

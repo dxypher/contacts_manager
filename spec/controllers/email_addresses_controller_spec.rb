@@ -62,6 +62,10 @@ describe EmailAddressesController do
   end
 
   describe "POST create" do
+
+    let(:sam) {Person.create(first_name: "Sam", last_name: "Well")}
+    let(:valid_attributes) {{address: 'hello@example.com', person_id: sam.id}}
+
     describe "with valid params" do
       it "creates a new EmailAddress" do
         expect {
@@ -77,7 +81,7 @@ describe EmailAddressesController do
 
       it "redirects to the created email_address" do
         post :create, {:email_address => valid_attributes}, valid_session
-        response.should redirect_to(EmailAddress.last)
+        expect(response).to redirect_to(sam)
       end
     end
 

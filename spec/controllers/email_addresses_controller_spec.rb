@@ -104,6 +104,9 @@ describe EmailAddressesController do
 
   describe "PUT update" do
     describe "with valid params" do
+      let(:nick) {Person.create(first_name: "Nick", last_name: "H")}
+      let(:valid_attributes) {{address: "bye@example.com", person_id: nick.id}}
+
       it "updates the requested email_address" do
         email_address = EmailAddress.create! valid_attributes
         # Assuming there are no other email_addresses in the database, this
@@ -123,7 +126,7 @@ describe EmailAddressesController do
       it "redirects to the email_address" do
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
-        response.should redirect_to(email_address)
+        expect(response).to redirect_to(nick)
       end
     end
 

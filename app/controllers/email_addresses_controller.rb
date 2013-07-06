@@ -60,7 +60,7 @@ class EmailAddressesController < ApplicationController
 
     respond_to do |format|
       if @email_address.update_attributes(params[:email_address])
-        format.html { redirect_to @email_address, notice: 'Email address was successfully updated.' }
+        format.html { redirect_to @email_address.person, notice: 'Email address was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

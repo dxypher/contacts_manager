@@ -2,8 +2,7 @@
 
 <table>
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>Name</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,11 +11,11 @@
 <% @people.each do |person| %>
   <tr>
     <td><%= person.first_name %> <%= person.last_name %></td>
-    <ul class='actions'>
+    <td><ul class='actions'>
       <li><%= link_to 'Show', person %></li>
       <li><%= link_to 'Edit', edit_person_path(person) %></li>
       <li><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-    </ul>
+    </ul></td>
   </tr>
 <% end %>
 </table>

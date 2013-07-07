@@ -30,22 +30,6 @@ describe EmailAddressesController do
   # EmailAddressesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all email_addresses as @email_addresses" do
-      email_address = EmailAddress.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:email_addresses).should eq([email_address])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested email_address as @email_address" do
-      email_address = EmailAddress.create! valid_attributes
-      get :show, {:id => email_address.to_param}, valid_session
-      assigns(:email_address).should eq(email_address)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new email_address as @email_address" do
       get :new, {}, valid_session

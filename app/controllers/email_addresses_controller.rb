@@ -1,44 +1,18 @@
 class EmailAddressesController < ApplicationController
-  # GET /email_addresses
-  # GET /email_addresses.json
-  def index
-    @email_addresses = EmailAddress.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @email_addresses }
-    end
-  end
-
-  # GET /email_addresses/1
-  # GET /email_addresses/1.json
-  def show
-    @email_address = EmailAddress.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @email_address }
-    end
-  end
-
-  # GET /email_addresses/new
-  # GET /email_addresses/new.json
   def new
     @email_address = EmailAddress.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @email_address }
     end
   end
 
-  # GET /email_addresses/1/edit
   def edit
     @email_address = EmailAddress.find(params[:id])
   end
 
-  # POST /email_addresses
-  # POST /email_addresses.json
   def create
     @email_address = EmailAddress.new(params[:email_address])
 
@@ -53,8 +27,6 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # PUT /email_addresses/1
-  # PUT /email_addresses/1.json
   def update
     @email_address = EmailAddress.find(params[:id])
 
@@ -69,8 +41,6 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # DELETE /email_addresses/1
-  # DELETE /email_addresses/1.json
   def destroy
     @email_address = EmailAddress.find(params[:id])
     @email_address.destroy

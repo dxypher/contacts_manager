@@ -1,5 +1,6 @@
 class EmailAddressesController < ApplicationController
 
+  before_filter :lookup_email_address, only: [:edit, :update, :destroy]
   def new
     @email_address = EmailAddress.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
 
@@ -10,7 +11,6 @@ class EmailAddressesController < ApplicationController
   end
 
   def edit
-    @email_address = EmailAddress.find(params[:id])
   end
 
   def create
@@ -28,8 +28,6 @@ class EmailAddressesController < ApplicationController
   end
 
   def update
-    @email_address = EmailAddress.find(params[:id])
-
     respond_to do |format|
       if @email_address.update_attributes(params[:email_address])
         format.html { redirect_to @email_address.contact, notice: 'Email address was successfully updated.' }
@@ -42,12 +40,17 @@ class EmailAddressesController < ApplicationController
   end
 
   def destroy
-    @email_address = EmailAddress.find(params[:id])
     @email_address.destroy
 
     respond_to do |format|
       format.html { redirect_to email_addresses_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def lookup_email_address
+    @email_address = EmailAddress.find(params[:id])
   end
 end

@@ -1,5 +1,7 @@
 class PhoneNumbersController < ApplicationController
 
+  before_filter :lookup_phone_number, only: [:edit, :update, :destroy]
+
   def new
     @phone_number = PhoneNumber.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
 
@@ -10,7 +12,6 @@ class PhoneNumbersController < ApplicationController
   end
 
   def edit
-    @phone_number = PhoneNumber.find(params[:id])
   end
 
   def create
@@ -28,8 +29,6 @@ class PhoneNumbersController < ApplicationController
   end
 
   def update
-    @phone_number = PhoneNumber.find(params[:id])
-
     respond_to do |format|
       if @phone_number.update_attributes(params[:phone_number])
         format.html { redirect_to @phone_number.contact, notice: 'Phone number was successfully updated.' }
@@ -42,12 +41,16 @@ class PhoneNumbersController < ApplicationController
   end
 
   def destroy
-    @phone_number = PhoneNumber.find(params[:id])
     @phone_number.destroy
 
     respond_to do |format|
       format.html { redirect_to @phone_number.contact }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def lookup_phone_number
+    @phone_number = PhoneNumber.find(params[:id])
   end
 end

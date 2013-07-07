@@ -10,17 +10,9 @@
   <%= @person.last_name %>
 </p>
 
-<ul>
-  <% @person.phone_numbers.each do |phone| %>
-    <li><%= phone.number %> <%= link_to "edit", edit_phone_number_path(phone) %> | <%= link_to "delete", phone_number_path(phone), method: :delete %></li>
-  <% end %>
-</ul>
+<%= render 'phone_numbers/phone_numbers', :phone_numbers => @person.phone_numbers %>
 
-<ul>
-  <% @person.email_addresses.each do |email_address| %>
-    <li><%= email_address.address %><%= link_to 'edit', edit_email_address_path(email_address) %> | <%= link_to "delete", email_address_path(email_address), method: :delete %></li>
-  <%end%>
-</ul>
+<%= render "email_addresses/email_addresses", :email_addresses => @person.email_addresses %>
 <%= link_to 'Add phone number', new_phone_number_path(contact_id: @person.id, contact_type: 'Person') %> |
 <%= link_to 'Add email address', new_email_address_path(contact_id: @person.id, contact_type: 'Person'), id: "new_email_address" %> |
 <%= link_to 'Edit', edit_person_path(@person) %> |

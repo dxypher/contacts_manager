@@ -1,6 +1,8 @@
-<h1>Editing person</h1>
+<h1>Editing <%= @person.first_name + ' ' + @person.last_name %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
+<ul class='actions'>
+  <li><%= link_to 'Show', @person %></li>
+  <li><%= link_to 'Back', people_path %></li>
+</ul>

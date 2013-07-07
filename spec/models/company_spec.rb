@@ -25,4 +25,8 @@ describe Company do
     email_addresses = company.email_addresses.build(address: 'hello@example.com')
     expect(company.email_addresses.map(&:address)).to eq(['hello@example.com'])
   end
+
+  it 'converst to a string the company name' do
+    expect(company.to_s).to eq("ThoughtBot")
+  end
 end

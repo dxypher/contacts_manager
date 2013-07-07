@@ -23,7 +23,7 @@ describe EmailAddressesController do
   # This should return the minimal set of attributes required to create a valid
   # EmailAddress. As you add validations to EmailAddress, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "address" => "MyString", "person_id" => 1 } }
+  let(:valid_attributes) { { "address" => "MyString", "contact_id" => 1, "contact_type" => 'Person' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -64,7 +64,7 @@ describe EmailAddressesController do
   describe "POST create" do
 
     let(:sam) {Person.create(first_name: "Sam", last_name: "Well")}
-    let(:valid_attributes) {{address: 'hello@example.com', person_id: sam.id}}
+    let(:valid_attributes) {{address: 'hello@example.com', contact_id: sam.id, contact_type: 'Person'}}
 
     describe "with valid params" do
       it "creates a new EmailAddress" do
@@ -105,7 +105,7 @@ describe EmailAddressesController do
   describe "PUT update" do
     describe "with valid params" do
       let(:nick) {Person.create(first_name: "Nick", last_name: "H")}
-      let(:valid_attributes) {{address: "bye@example.com", person_id: nick.id}}
+      let(:valid_attributes) {{address: "bye@example.com", contact_id: nick.id, contact_type: 'Person'}}
 
       it "updates the requested email_address" do
         email_address = EmailAddress.create! valid_attributes

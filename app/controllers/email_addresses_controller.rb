@@ -24,7 +24,7 @@ class EmailAddressesController < ApplicationController
   # GET /email_addresses/new
   # GET /email_addresses/new.json
   def new
-    @email_address = EmailAddress.new(person_id: params[:person_id])
+    @email_address = EmailAddress.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,8 +44,8 @@ class EmailAddressesController < ApplicationController
 
     respond_to do |format|
       if @email_address.save
-        format.html { redirect_to @email_address.person, notice: 'Email address was successfully created.' }
-        format.json { render json: @email_address.person, status: :created, location: @email_address }
+        format.html { redirect_to @email_address.contact, notice: 'Email address was successfully created.' }
+        format.json { render json: @email_address.contact, status: :created, location: @email_address }
       else
         format.html { render action: "new" }
         format.json { render json: @email_address.errors, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class EmailAddressesController < ApplicationController
 
     respond_to do |format|
       if @email_address.update_attributes(params[:email_address])
-        format.html { redirect_to @email_address.person, notice: 'Email address was successfully updated.' }
+        format.html { redirect_to @email_address.contact, notice: 'Email address was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -30,22 +30,6 @@ describe PhoneNumbersController do
   # PhoneNumbersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all phone_numbers as @phone_numbers" do
-      phone_number = PhoneNumber.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:phone_numbers).should eq([phone_number])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested phone_number as @phone_number" do
-      phone_number = PhoneNumber.create! valid_attributes
-      get :show, {:id => phone_number.to_param}, valid_session
-      assigns(:phone_number).should eq(phone_number)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new phone_number as @phone_number" do
       get :new, {}, valid_session

@@ -11,13 +11,15 @@
 <% @companies.each do |company| %>
   <tr>
     <td><%= company.name %></td>
-    <td><%= link_to 'Show', company %></td>
-    <td><%= link_to 'Edit', edit_company_path(company) %></td>
-    <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <ul class='actions'>
+      <li><%= link_to 'Show', company %></li>
+      <li><%= link_to 'Edit', edit_company_path(company) %></li>
+      <li><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    </ul>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to 'New Company', new_company_path, id: 'new_company' %>

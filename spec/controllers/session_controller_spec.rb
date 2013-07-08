@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   before(:each) do
     Rails.application.routes.draw do
-      resource :sessions, :only => [:create]
+      resource :sessions, :only => [:create, :destroy]
       root to: 'site#index'
     end
   end
@@ -49,6 +49,22 @@ describe SessionsController do
 
       post :create
       expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe '#destroy' do
+    it 'logs out user' do
+      @request.env['omniauth.auth'] = {
+        'provider' => 'twitter',
+        'info' => {'name' => "John Doe"},
+        'uid' => 'def123'
+      }
+
+      user = User.create(provider: 'twitter', uid: 'def123', name: "John Doe")
+
+      post :create
+      delete :destroy
+      expect(controller.current_user.id).to_not eq(user.id)
     end
   end
 end

@@ -64,7 +64,8 @@ describe SessionsController do
 
       post :create
       delete :destroy
-      expect(controller.current_user.id).to_not eq(user.id)
+      expect(controller.current_user).to eq(nil)
+      expect(response).to redirect_to(root_path)
     end
   end
 end
